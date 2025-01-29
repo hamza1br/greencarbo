@@ -1,5 +1,6 @@
 import React from 'react';
 import SEO from '@/Components/SEO.jsx';
+import '../../css/app.css'; 
 import { ChevronDown, Mail, Phone, MapPin, Leaf, LineChart, Target, Users, ArrowRight } from 'lucide-react';
 
 const GreenCarboHome = () => {

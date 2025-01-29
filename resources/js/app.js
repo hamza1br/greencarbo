@@ -4,4 +4,8 @@ import GreenCarboHome from '@/Components/GreenCarboHome'; // Utilisation de l'al
 
 const container = document.getElementById('app');
 const root = createRoot(container);
-root.render(<GreenCarboHome />);
+root.render(
+    <React.StrictMode>
+      <GreenCarboHome />
+    </React.StrictMode>
+  );
