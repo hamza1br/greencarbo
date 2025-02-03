@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../css/app.css'; 
+import logo from "../assets/logo.png";
 import { Leaf, LineChart, Target, Users, Rocket, Brain, FileCheck, ArrowRight, CheckCircle, Award, TrendingUp } from 'lucide-react';
 
 const GreenCarboHome = () => {
@@ -27,10 +28,14 @@ const GreenCarboHome = () => {
       <header className="fixed top-0 w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('hero')}>
-              <Leaf className="h-6 w-6 text-green-600" />
-              <span className="ml-2 text-xl font-semibold text-gray-800">GreenCarbo</span>
-            </div>
+          <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('hero')}>
+            <img 
+              src={logo} 
+              alt="GreenCarbo Logo"
+              className="h-full w-auto object-contain"
+              // Added object-contain for proper scaling
+            />
+          </div>
             <nav className="hidden md:flex items-center space-x-8">
               <button onClick={() => scrollToSection('apropos')} className="text-gray-600 hover:text-green-600 transition-colors">
                 À propos
