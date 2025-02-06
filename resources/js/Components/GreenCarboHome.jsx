@@ -461,6 +461,63 @@ const GreenCarboHome = () => {
           </div>
         </div>
       </section>
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center mb-4">
+                <Leaf className="h-6 w-6 text-green-400" />
+                <span className="ml-2 text-lg font-bold">GreenCarbo</span>
+              </div>
+              <p className="text-gray-400">
+                Votre partenaire pour une transition écologique réussie.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Contact</h4>
+              <div className="space-y-2 text-gray-400">
+                <p className="flex items-center">
+                  <Leaf className="h-5 w-5 mr-2" />
+                  contact@greencarbo.fr
+                </p>
+                <p className="flex items-center">
+                  <Leaf className="h-5 w-5 mr-2" />
+                  +33 1 23 45 67 89
+                </p>
+                <p className="flex items-center">
+                  <Leaf className="h-5 w-5 mr-2" />
+                  Paris, France
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Services</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>Évaluation carbone</li>
+                <li>Stratégie RSE</li>
+                <li>Formation</li>
+                <li>Accompagnement</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Légal</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>Mentions légales</li>
+                <li>Confidentialité</li>
+                <li>CGU</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 GreenCarbo. Tous droits réservés.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
