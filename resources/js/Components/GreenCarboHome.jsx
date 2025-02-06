@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../../css/app.css'; 
 import logo from "../assets/logo.png";
 import { Leaf, LineChart, Target, Users, Rocket, Brain, FileCheck, ArrowRight, CheckCircle, Award, TrendingUp } from 'lucide-react';
+import img1 from "../assets/img1.jpg";
+import im3 from "../assets/im3.jpg";
 
 const GreenCarboHome = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +34,7 @@ const GreenCarboHome = () => {
             <img 
               src={logo} 
               alt="GreenCarbo Logo"
-              className="h-full w-auto object-contain"
+              className="h-20 w-29 object-contain"
               // Added object-contain for proper scaling
             />
           </div>
@@ -290,33 +292,103 @@ const GreenCarboHome = () => {
       {/* Impact Section */}
       <section id="impact" className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">Notre Impact</h2>
-          <div className="max-w-3xl mx-auto bg-white rounded-2xl p-8 shadow-sm">
+          <h2 className="text-4xl font-bold text-center mb-16">
+            Embarquer vos collaborateurs sur <br/>
+            la RSE, c'est aussi :
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            {/* Image côté gauche */}
+            <div className="relative rounded-2xl overflow-hidden shadow-lg h-[400px]">
+              <img 
+                src={img1} 
+                alt="Collaboration RSE" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Contenu côté droit */}
             <div className="space-y-8">
-              {[
-                {
-                  title: "Réduction des émissions",
-                  description: "Nos clients ont réduit leurs émissions de CO2 de 45% en moyenne"
-                },
-                {
-                  title: "Économies réalisées",
-                  description: "Plus de 2M€ d'économies générées grâce à l'optimisation des ressources"
-                },
-                {
-                  title: "Engagement des employés",
-                  description: "87% des employés plus engagés après nos formations RSE"
-                }
-              ].map((item, index) => (
-                <div key={index} className="flex items-start">
-                  <div className="bg-green-100 rounded-full p-2 mr-4">
-                    <Target className="h-5 w-5 text-green-600" />
+              <h3 className="text-3xl font-bold text-gray-900">
+                Améliorer votre marque employeur
+              </h3>
+
+              <div className="space-y-6">
+                {[
+                  {
+                    title: "Attirer et retenir les talents",
+                    description: "Développez une culture d'entreprise attractive et engageante"
+                  },
+                  {
+                    title: "Améliorer votre réputation",
+                    description: "Renforcez votre image d'entreprise responsable"
+                  },
+                  {
+                    title: "Accroître la satisfaction",
+                    description: "Répondez aux attentes de vos collaborateurs en quête de sens"
+                  }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                        <Target className="w-6 h-6 text-green-600" />
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h4>
+                      <p className="text-gray-600">{item.description}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-                    <p className="text-gray-600">{item.description}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Deuxième bloc avec ordre inversé */}
+          <div className="mt-24 grid md:grid-cols-2 gap-16 items-center">
+            {/* Contenu côté gauche */}
+            <div className="space-y-8 order-2 md:order-1">
+              <h3 className="text-3xl font-bold text-gray-900">
+                Optimiser votre performance
+              </h3>
+
+              <div className="space-y-6">
+                {[
+                  {
+                    title: "Réduire vos coûts",
+                    description: "Optimisez votre consommation d'énergie et vos ressources"
+                  },
+                  {
+                    title: "Innover durablement",
+                    description: "Développez des solutions respectueuses de l'environnement"
+                  },
+                  {
+                    title: "Mesurer vos progrès",
+                    description: "Suivez vos indicateurs de performance environnementale"
+                  }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                        <Target className="w-6 h-6 text-green-600" />
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h4>
+                      <p className="text-gray-600">{item.description}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+
+            {/* Image côté droit */}
+            <div className="relative rounded-2xl overflow-hidden shadow-lg h-[400px] order-1 md:order-2">
+              <img 
+                src={im3} 
+                alt="Performance RSE" 
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
