@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 import { Leaf, LineChart, Target, Users, Rocket, Brain, FileCheck, ArrowRight, CheckCircle, Award, TrendingUp } from 'lucide-react';
 import img1 from "../assets/img1.jpg";
 import im3 from "../assets/im3.jpg";
+import axios from 'axios';
 
 const GreenCarboHome = () => {
   const [formData, setFormData] = useState({
@@ -12,11 +13,38 @@ const GreenCarboHome = () => {
     entreprise: '',
     message: ''
   });
+  
+  const [status, setStatus] = useState({
+    submitting: false,
+    success: null,
+    error: null
+  });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+    setStatus({ submitting: true, success: null, error: null });
+
+    try {
+      const response = await axios.post('/contact', formData);
+      setStatus({
+        submitting: false,
+        success: response.data.message,
+        error: null
+      });
+      // Réinitialiser le formulaire
+      setFormData({
+        nom: '',
+        email: '',
+        entreprise: '',
+        message: ''
+      });
+    } catch (error) {
+      setStatus({
+        submitting: false,
+        success: null,
+        error: error.response?.data?.message || 'Une erreur est survenue'
+      });
+    }
   };
 
   const scrollToSection = (sectionId) => {
@@ -397,67 +425,120 @@ const GreenCarboHome = () => {
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">Contactez-nous</h2>
-          <div className="max-w-2xl mx-auto">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center bg-green-100 rounded-full px-4 py-2 text-green-700 mb-4">
+              <Users className="h-4 w-4 mr-2" />
+              <span className="text-sm font-medium">Parlons de votre projet</span>
+            </div>
+            <h2 className="text-4xl font-bold mb-4">Contactez-nous</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Notre équipe d'experts est à votre écoute pour vous accompagner dans votre démarche RSE
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <div className="text-center p-6 bg-green-50 rounded-xl">
+                <div className="bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Leaf className="h-6 w-6 text-green-600" />
+                </div>
+                <h3 className="font-semibold mb-2">Email</h3>
+                <p className="text-gray-600">contact@greencarbo.fr</p>
+              </div>
+              <div className="text-center p-6 bg-green-50 rounded-xl">
+                <div className="bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Target className="h-6 w-6 text-green-600" />
+                </div>
+                <h3 className="font-semibold mb-2">Téléphone</h3>
+                <p className="text-gray-600">+33 1 23 45 67 89</p>
+              </div>
+              <div className="text-center p-6 bg-green-50 rounded-xl">
+                <div className="bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="h-6 w-6 text-green-600" />
+                </div>
+                <h3 className="font-semibold mb-2">Bureau</h3>
+                <p className="text-gray-600">Paris, France</p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Affichage des messages de statut */}
+                {status.error && (
+                  <div className="p-4 bg-red-50 text-red-600 rounded-lg">
+                    {status.error}
+                  </div>
+                )}
+                {status.success && (
+                  <div className="p-4 bg-green-50 text-green-600 rounded-lg">
+                    {status.success}
+                  </div>
+                )}
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Nom complet
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                      value={formData.nom}
+                      onChange={(e) => setFormData({...formData, nom: e.target.value})}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email professionnel
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    />
+                  </div>
+                </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Nom complet
+                    Entreprise
                   </label>
                   <input
                     type="text"
                     required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                    value={formData.nom}
-                    onChange={(e) => setFormData({...formData, nom: e.target.value})}
+                    value={formData.entreprise}
+                    onChange={(e) => setFormData({...formData, entreprise: e.target.value})}
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email professionnel
+                    Votre message
                   </label>
-                  <input
-                    type="email"
+                  <textarea
                     required
+                    rows={4}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
                   />
                 </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Entreprise
-                </label>
-                <input
-                  type="text"
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                  value={formData.entreprise}
-                  onChange={(e) => setFormData({...formData, entreprise: e.target.value})}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Votre message
-                </label>
-                <textarea
-                  required
-                  rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                  value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center"
-              >
-                Envoyer le message
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </button>
-            </form>
+
+                <button
+                  type="submit"
+                  disabled={status.submitting}
+                  className="w-full px-6 py-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all flex items-center justify-center group disabled:opacity-50"
+                >
+                  {status.submitting ? 'Envoi en cours...' : 'Envoyer le message'}
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <p className="text-sm text-gray-500 text-center mt-4">
+                  * Champs obligatoires
+                </p>
+              </form>
+            </div>
           </div>
         </div>
       </section>
